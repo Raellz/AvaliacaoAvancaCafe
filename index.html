@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avança Café - Avaliação de Pitch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Avança Café</h1>
+      <p>Avaliação do Pitch de Problema - Etapa Hackathon</p>
+      <div class="nav-links">
+        <a href="ranking.html">📊 Ver Apuração / Ranking</a>
+      </div>
+    </header>
+
+    <form id="evaluationForm" class="card">
+      <div class="form-group">
+        <label for="evaluatorName">Nome do(a) Avaliador(a):</label>
+        <input type="text" id="evaluatorName" required placeholder="Digite seu nome completo">
+      </div>
+
+      <div class="form-group">
+        <label for="campusSelect">Polo / Campus:</label>
+        <select id="campusSelect" required>
+          <option value="">Selecione o polo...</option>
+          <option value="paraiso">UFLA - Câmpus São Sebastião do Paraíso</option>
+          <option value="sede">UFLA - Câmpus Sede (Lavras)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="startupSelect">Startup / Equipe:</label>
+        <select id="startupSelect" required>
+          <option value="">Selecione primeiro o polo...</option>
+        </select>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+      <!-- Critério 1 -->
+      <div class="form-group">
+        <label>1. Problema Específico (1 a 5)</label>
+        <div class="hint">O problema está apresentado de modo compreensível?</div>
+        <div class="score-options" data-criteria="c1">
+          <div class="score-option"><input type="radio" id="c1_1" name="c1" value="1" required><label for="c1_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c1_2" name="c1" value="2"><label for="c1_2">2</label></div>
+          <div class="score-option"><input type="radio" id="c1_3" name="c1" value="3"><label for="c1_3">3</label></div>
+          <div class="score-option"><input type="radio" id="c1_4" name="c1" value="4"><label for="c1_4">4</label></div>
+          <div class="score-option"><input type="radio" id="c1_5" name="c1" value="5"><label for="c1_5">5</label></div>
+        </div>
+      </div>
+
+      <!-- Critério 2 -->
+      <div class="form-group">
+        <label>2. Público Específico (1 a 5)</label>
+        <div class="hint">Há clareza sobre qual o público que sofre o problema?</div>
+        <div class="score-options" data-criteria="c2">
+          <div class="score-option"><input type="radio" id="c2_1" name="c2" value="1" required><label for="c2_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c2_2" name="c2" value="2"><label for="c2_2">2</label></div>
+          <div class="score-option"><input type="radio" id="c2_3" name="c2" value="3"><label for="c2_3">3</label></div>
+          <div class="score-option"><input type="radio" id="c2_4" name="c2" value="4"><label for="c2_4">4</label></div>
+          <div class="score-option"><input type="radio" id="c2_5" name="c2" value="5"><label for="c2_5">5</label></div>
+        </div>
+      </div>
+
+      <!-- Critério 3 -->
+      <div class="form-group">
+        <label>3. Dor Específica (1 a 5)</label>
+        <div class="hint">A 'dor' apresentada é relevante e está bem delineada?</div>
+        <div class="score-options" data-criteria="c3">
+          <div class="score-option"><input type="radio" id="c3_1" name="c3" value="1" required><label for="c3_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c3_2" name="c3" value="2"><label for="c3_2">2</label></div>
+          <div class="score-option"><input type="radio" id="c3_3" name="c3" value="3"><label for="c3_3">3</label></div>
+          <div class="score-option"><input type="radio" id="c3_4" name="c3" value="4"><label for="c3_4">4</label></div>
+          <div class="score-option"><input type="radio" id="c3_5" name="c3" value="5"><label for="c3_5">5</label></div>
+        </div>
+      </div>
+
+      <!-- Critério 4 -->
+      <div class="form-group">
+        <label>4. Evidências (1 a 5)</label>
+        <div class="hint">As evidências apresentadas corroboram a existência do problema?</div>
+        <div class="score-options" data-criteria="c4">
+          <div class="score-option"><input type="radio" id="c4_1" name="c4" value="1" required><label for="c4_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c4_2" name="c4" value="2"><label for="c4_2">2</label></div>
+          <div class="score-option"><input type="radio" id="c4_3" name="c4" value="3"><label for="c4_3">3</label></div>
+          <div class="score-option"><input type="radio" id="c4_4" name="c4" value="4"><label for="c4_4">4</label></div>
+          <div class="score-option"><input type="radio" id="c4_5" name="c4" value="5"><label for="c4_5">5</label></div>
+        </div>
+      </div>
+
+      <!-- Critério 5 -->
+      <div class="form-group">
+        <label>5. Impacto (1 a 5)</label>
+        <div class="hint">Resolver o problema trará impacto relevante para o público?</div>
+        <div class="score-options" data-criteria="c5">
+          <div class="score-option"><input type="radio" id="c5_1" name="c5" value="1" required><label for="c5_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c5_2" name="c5" value="2"><label for="c5_2">2</label></div>
+          <div class="score-option"><input type="radio" id="c5_3" name="c5" value="3"><label for="c5_3">3</label></div>
+          <div class="score-option"><input type="radio" id="c5_4" name="c5" value="4"><label for="c5_4">4</label></div>
+          <div class="score-option"><input type="radio" id="c5_5" name="c5" value="5"><label for="c5_5">5</label></div>
+        </div>
+      </div>
+
+      <!-- Critério Opcional: Hipóteses -->
+      <div class="form-group">
+        <label>6. Hipóteses (Opcional - 1 a 5)</label>
+        <div class="hint">As hipóteses de soluções são adequadas para o problema?</div>
+        <div class="score-options" data-criteria="c6">
+          <div class="score-option"><input type="radio" id="c6_1" name="c6" value="1"><label for="c6_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c6_2" name="c6" value="2"><label for="c6_2">2</label></div>
+          <div class="score-option"><input type="radio" id="c6_3" name="c6" value="3"><label for="c6_3">3</label></div>
+          <div class="score-option"><input type="radio" id="c6_4" name="c6" value="4"><label for="c6_4">4</label></div>
+          <div class="score-option"><input type="radio" id="c6_5" name="c6" value="5"><label for="c6_5">5</label></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="observations">Observações / Feedback:</label>
+        <textarea id="observations" rows="3" placeholder="Comentários para a equipe..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Enviar Avaliação</button>
+    </form>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
