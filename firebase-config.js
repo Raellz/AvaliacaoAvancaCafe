@@ -1,14 +1,14 @@
-// Importações SDK Modular do Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJETO_ID",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SEU_APP_ID"
+  apiKey: "AIzaSyDJb4sIVnni45KPXPFvpP2-l2yXiBGkcmQ",
+  authDomain: "avaliacaoavancacafe.firebaseapp.com",
+  projectId: "avaliacaoavancacafe",
+  storageBucket: "avaliacaoavancacafe.firebasestorage.app",
+  messagingSenderId: "751870170365",
+  appId: "1:751870170365:web:b9d0970babeb3d13455a94",
+  measurementId: "G-7W30SBG7G8"
 };
 
 const app = initializeApp(firebaseConfig);
