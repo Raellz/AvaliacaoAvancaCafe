@@ -3,39 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avança Café - Avaliação de Pitch</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Avança Café - Avaliação de Pitch | Paraíso</title>
+  <link rel="stylesheet" href="paraiso.css">
 </head>
-<body>
+<body class="evaluation-page">
   <div class="container">
-    <header>
+    <header class="evaluation-header">
+      <p class="evaluation-kicker">UFLA <span>·</span> Câmpus São Sebastião do Paraíso</p>
       <h1>Avança Café</h1>
       <p>Avaliação do Pitch de Problema - Etapa Hackathon</p>
       <div class="nav-links">
-        <a href="ranking.html">📊 Ver Apuração / Ranking</a>
+        <a href="ranking_paraiso.html">Ver apuração e ranking</a>
       </div>
     </header>
 
-    <form id="evaluationForm" class="card">
+    <form id="evaluationForm" class="card evaluation-card">
       <div class="form-group">
         <label for="evaluatorName">Nome do(a) Avaliador(a):</label>
         <input type="text" id="evaluatorName" required placeholder="Digite seu nome completo">
       </div>
 
       <div class="form-group">
-        <label for="campusSelect">Polo / Campus:</label>
-        <select id="campusSelect" required>
-          <option value="">Selecione o polo...</option>
-          <option value="paraiso">UFLA - Câmpus São Sebastião do Paraíso</option>
-          <option value="sede">UFLA - Câmpus Sede (Lavras)</option>
-        </select>
-      </div>
-
-      <div class="form-group">
         <label for="startupSelect">Startup / Equipe:</label>
         <select id="startupSelect" required>
-          <option value="">Selecione primeiro o polo...</option>
+          <option value="">Carregando startups...</option>
         </select>
+        <p id="startupStatus" class="hint" role="status">Buscando startups cadastradas...</p>
+        <div id="presentationPdf" class="presentation-pdf" hidden>
+          <a id="presentationLink" href="#" target="_blank" rel="noopener noreferrer">📄 Abrir PDF do pitch</a>
+        </div>
       </div>
 
       <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 24px 0;">
@@ -105,12 +101,12 @@
         </div>
       </div>
 
-      <!-- Critério Opcional: Hipóteses -->
+      <!-- Critério 6 -->
       <div class="form-group">
-        <label>6. Hipóteses (Opcional - 1 a 5)</label>
+        <label>6. Hipóteses (1 a 5)</label>
         <div class="hint">As hipóteses de soluções são adequadas para o problema?</div>
         <div class="score-options" data-criteria="c6">
-          <div class="score-option"><input type="radio" id="c6_1" name="c6" value="1"><label for="c6_1">1</label></div>
+          <div class="score-option"><input type="radio" id="c6_1" name="c6" value="1" required><label for="c6_1">1</label></div>
           <div class="score-option"><input type="radio" id="c6_2" name="c6" value="2"><label for="c6_2">2</label></div>
           <div class="score-option"><input type="radio" id="c6_3" name="c6" value="3"><label for="c6_3">3</label></div>
           <div class="score-option"><input type="radio" id="c6_4" name="c6" value="4"><label for="c6_4">4</label></div>
@@ -127,6 +123,6 @@
     </form>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script type="module" src="paraiso.js"></script>
 </body>
 </html>

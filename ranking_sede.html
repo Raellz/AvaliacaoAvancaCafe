@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avança Café - Ranking UFLA Sede</title>
+  <link rel="stylesheet" href="sede.css">
+</head>
+<body class="evaluation-page ranking-page">
+  <div class="container">
+    <header class="evaluation-header">
+      <p class="evaluation-kicker">UFLA <span>·</span> Câmpus Sede (Lavras)</p>
+      <h1>Quadro de Apuração</h1>
+      <p>Ranking das startups do Câmpus Sede (Lavras)</p>
+      <div class="nav-links">
+        <a href="sede.html">Voltar para avaliação da Sede</a>
+        <a href="paraiso.html">Avaliação de São Sebastião do Paraíso</a>
+      </div>
+    </header>
+
+    <div class="card">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>Pos.</th>
+            <th>Startup</th>
+            <th>Pitch (PDF)</th>
+            <th>Avaliações</th>
+            <th>Média Geral</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody id="rankingBody">
+          <tr>
+            <td colspan="6" style="text-align: center; color: var(--text-muted);">Carregando resultados...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <dialog id="observationDialog" class="observation-dialog" aria-labelledby="observationTitle">
+    <div class="observation-dialog-header">
+      <h2 id="observationTitle">Observações</h2>
+      <button type="button" class="dialog-close" id="closeObservationDialog" aria-label="Fechar">&times;</button>
+    </div>
+    <div id="observationContent" class="observation-content"></div>
+  </dialog>
+
+  <script type="module" src="ranking_sede.js"></script>
+</body>
+</html>
