@@ -9,7 +9,8 @@ let evaluations = [];
 let startups = [];
 let evaluationsLoaded = false;
 let startupsLoaded = false;
-let loadError = "";
+let evaluationsError = "";
+let startupsError = "";
 
 function normalizeKey(value) {
   return value
@@ -39,6 +40,7 @@ function safeWebUrl(value) {
 
 function renderRanking() {
   rankingBody.replaceChildren();
+  const loadError = evaluationsError || startupsError;
   if (loadError) {
     rankingBody.innerHTML = `<tr><td colspan="6" class="ranking-message">${loadError}</td></tr>`;
     return;
@@ -85,11 +87,7 @@ function renderRanking() {
   });
 
   const ranked = [...summary.values()]
-    .map((item) => ({
-      ...item,
-      average: item.evaluationsCount ? item.totalScoreSum / item.evaluationsCount : 0
-    }))
-    .sort((a, b) => b.average - a.average);
+    .sort((a, b) => b.totalScoreSum - a.totalScoreSum);
 
   if (!ranked.length) {
     rankingBody.innerHTML = '<tr><td colspan="6" class="ranking-message">Nenhuma avaliação da Sede registrada.</td></tr>';
@@ -123,9 +121,9 @@ function renderRanking() {
     const count = document.createElement("td");
     count.textContent = item.evaluationsCount;
 
-    const average = document.createElement("td");
-    average.className = "ranking-average";
-    average.textContent = `${item.average.toFixed(2)} pts`;
+    const score = document.createElement("td");
+    score.className = "ranking-total-score";
+    score.textContent = `${item.totalScoreSum} pts`;
 
     const notes = document.createElement("td");
     if (item.observations.length) {
@@ -139,7 +137,7 @@ function renderRanking() {
       notes.appendChild(button);
     }
 
-    row.append(position, name, pdfCell, count, average, notes);
+    row.append(position, name, pdfCell, count, score, notes);
     rankingBody.appendChild(row);
   });
 }
@@ -170,11 +168,11 @@ document.getElementById("closeObservationDialog").addEventListener("click", () =
 onSnapshot(collection(db, "evaluations_sede"), (snapshot) => {
   evaluations = snapshot.docs.map((doc) => doc.data());
   evaluationsLoaded = true;
-  loadError = "";
+  evaluationsError = "";
   renderRanking();
 }, (err) => {
   console.error("Erro ao carregar avaliações da Sede:", err);
-  loadError = "Não foi possível carregar evaluations_sede. Verifique a conexão e as permissões do Firebase.";
+  evaluationsError = "Não foi possível carregar evaluations_sede. Verifique a conexão e as permissões do Firebase.";
   renderRanking();
 });
 
@@ -188,10 +186,10 @@ onSnapshot(collection(db, "startups_sede"), (snapshot) => {
     };
   });
   startupsLoaded = true;
-  loadError = "";
+  startupsError = "";
   renderRanking();
 }, (err) => {
   console.error("Erro ao carregar startups e PDFs da Sede:", err);
-  loadError = "Não foi possível carregar startups_sede. Verifique a conexão e as permissões do Firebase.";
+  startupsError = "Não foi possível carregar startups_sede. Verifique a conexão e as permissões do Firebase.";
   renderRanking();
 });

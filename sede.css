@@ -290,7 +290,7 @@ button.btn-primary:hover {
   font-weight: 600;
 }
 
-.ranking-average {
+.ranking-total-score {
   color: var(--coffee-accent);
   font-weight: bold;
 }

@@ -11,6 +11,7 @@ const presentationPdf = document.getElementById("presentationPdf");
 const presentationLink = document.getElementById("presentationLink");
 const evaluatorInput = document.getElementById("evaluatorName");
 const form = document.getElementById("evaluationForm");
+const submitButton = form.querySelector('button[type="submit"]');
 const evaluatorStorageKey = "avancaCafeEvaluatorName_sede";
 
 let startups = new Map();
@@ -138,6 +139,7 @@ form.addEventListener("submit", async (e) => {
   };
   payload.totalScore = payload.c1 + payload.c2 + payload.c3 + payload.c4 + payload.c5 + payload.c6;
 
+  submitButton.disabled = true;
   try {
     await addDoc(collection(db, EVALUATIONS_COLLECTION), payload);
     alert("Avaliação da UFLA Sede registrada com sucesso!");
@@ -148,5 +150,7 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     console.error("Erro ao salvar avaliação da UFLA Sede:", err);
     alert("Ocorreu um erro ao salvar a avaliação. Verifique a conexão.");
+  } finally {
+    submitButton.disabled = false;
   }
 });

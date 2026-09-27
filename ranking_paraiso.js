@@ -2,12 +2,6 @@ import { db } from "./firebase-config.js";
 import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 let allEvaluations = [];
-const paraisoStartups = new Set([
-  "CoffeeTech Solutions",
-  "AgroDrone Paraíso",
-  "BioGrao Analytics",
-  "SmartHarvest"
-]);
 
 const rankingBody = document.getElementById("rankingBody");
 const observationDialog = document.getElementById("observationDialog");
@@ -19,42 +13,45 @@ document.getElementById("closeObservationDialog").addEventListener("click", () =
 });
 
 // Listener em tempo real do Firestore
-onSnapshot(collection(db, "evaluations"), (snapshot) => {
+onSnapshot(collection(db, "evaluations_paraiso"), (snapshot) => {
   allEvaluations = [];
   snapshot.forEach(doc => allEvaluations.push(doc.data()));
   renderRanking();
+}, (err) => {
+  console.error("Erro ao carregar avaliações de Paraíso:", err);
+  rankingBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Não foi possível carregar o ranking. Verifique a conexão e as permissões do Firebase.</td></tr>';
 });
 
 function renderRanking() {
-  // Agrupa e calcula as médias por startup
+  // Soma as pontuações de cada startup
   const summary = {};
 
-  allEvaluations
-    .filter(ev => ev.campus === "paraiso" || paraisoStartups.has(ev.startup))
-    .forEach(ev => {
-      if (!summary[ev.startup]) {
-        summary[ev.startup] = {
-          name: ev.startup,
-          totalScoreSum: 0,
-          evaluationsCount: 0,
-          observations: []
-        };
-      }
-      summary[ev.startup].totalScoreSum += (ev.totalScore || 0);
-      summary[ev.startup].evaluationsCount += 1;
-      const note = typeof ev.notes === "string" ? ev.notes.trim() : "";
-      if (note) {
-        summary[ev.startup].observations.push({
-          evaluator: typeof ev.evaluator === "string" ? ev.evaluator.trim() : "",
-          note
-        });
-      }
-    });
+  allEvaluations.forEach((ev) => {
+    const startupName = ev.startup || "Startup sem nome";
+    if (!summary[startupName]) {
+      summary[startupName] = {
+        name: startupName,
+        totalScoreSum: 0,
+        evaluationsCount: 0,
+        observations: []
+      };
+    }
+    const score = Number(ev.totalScore) || ["c1", "c2", "c3", "c4", "c5", "c6"]
+      .reduce((sum, criterion) => sum + (Number(ev[criterion]) || 0), 0);
+    summary[startupName].totalScoreSum += score;
+    summary[startupName].evaluationsCount += 1;
 
-  const ranked = Object.values(summary).map(item => ({
-    ...item,
-    average: item.evaluationsCount > 0 ? (item.totalScoreSum / item.evaluationsCount).toFixed(2) : 0
-  })).sort((a, b) => b.average - a.average);
+    const note = typeof ev.notes === "string" ? ev.notes.trim() : "";
+    if (note) {
+      summary[startupName].observations.push({
+        evaluator: typeof ev.evaluator === "string" ? ev.evaluator.trim() : "",
+        note
+      });
+    }
+  });
+
+  const ranked = Object.values(summary)
+    .sort((a, b) => b.totalScoreSum - a.totalScoreSum);
 
   // Renderiza tabela
   rankingBody.innerHTML = "";
@@ -79,9 +76,9 @@ function renderRanking() {
     const evaluationsCell = document.createElement("td");
     evaluationsCell.textContent = item.evaluationsCount;
 
-    const averageCell = document.createElement("td");
-    averageCell.className = "ranking-average";
-    averageCell.textContent = `${item.average} pts`;
+    const scoreCell = document.createElement("td");
+    scoreCell.className = "ranking-total-score";
+    scoreCell.textContent = `${item.totalScoreSum} pts`;
 
     const observationsCell = document.createElement("td");
     if (item.observations.length > 0) {
@@ -95,7 +92,7 @@ function renderRanking() {
       observationsCell.appendChild(eyeButton);
     }
 
-    tr.append(positionCell, nameCell, evaluationsCell, averageCell, observationsCell);
+    tr.append(positionCell, nameCell, evaluationsCell, scoreCell, observationsCell);
     rankingBody.appendChild(tr);
   });
 }
