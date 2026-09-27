@@ -1,4 +1,4 @@
-import { db } from "./firebase-config.js";
+import { db } from "../firebase-config.js";
 import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 let allEvaluations = [];
